@@ -1,0 +1,18 @@
+we should be very much aware of the fact that people take time
+implementing the code due to the errors they face;
+we have many attributes in our classes
+if we forget to intiale them
+we might end up with the null pointer exception down the line;
+So ensure that all the attributes are initialized to something if we thing
+
+there are two ways to handle it:
+
+1=> and the ways is create constructor in every class and initiale the attributes
+
+
+All the classes are se i.e we have created the constructors and initialed the attributes
+So start thinking of the user flow
+
+This is a interactive desktop application so the main class should make the whole application run
+so create a main class. Lets call it as TicTacToeGame class.
+
