@@ -69,5 +69,9 @@ public class GameController {
          game.makeNextMove();
     }
 
+    public Player getWinner(Game game){
+        return game.getWinner();
+    }
+
 
 }

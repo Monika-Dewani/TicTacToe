@@ -1,6 +1,8 @@
 package TicTacToe.Models;
 
 import TicTacToe.Exceptions.InvalidGameConstructionParametersException;
+import TicTacToe.Strategies.gameWinningStrategy.GameWinningStrategy;
+import TicTacToe.Strategies.gameWinningStrategy.OrderOneGameWinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,22 @@ public class Game {
     private List<Move> moves;
     private GameStatus gameStatus;
     private int nextPlayerIndex;
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    private Player winner;
+
+    public GameWinningStrategy getGameWinningStrategy() {
+        return gameWinningStrategy;
+    }
+
+    public void setGameWinningStrategy(GameWinningStrategy gameWinningStrategy) {
+        this.gameWinningStrategy = gameWinningStrategy;
+    }
+
+    private GameWinningStrategy gameWinningStrategy;
 
     public Game(){
 
@@ -93,6 +111,11 @@ public class Game {
         );
 
         this.moves.add(finalMove);
+
+        if(gameWinningStrategy.checkWinner(board,players.get(nextPlayerIndex),finalMove.getCell())){
+            gameStatus=GameStatus.ENDED;
+            winner=players.get(nextPlayerIndex);
+        }
         nextPlayerIndex +=1;
         nextPlayerIndex %= players.size();
     }
@@ -182,6 +205,7 @@ public class Game {
             game.setBoard(new Board(dimension));
             game.setMove(new ArrayList<>());
             game.setNextPlayerIndex(0);
+            game.setGameWinningStrategy(new OrderOneGameWinningStrategy(dimension));
 
             return game;
 
